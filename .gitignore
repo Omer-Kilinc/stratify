@@ -1,0 +1,13 @@
+# Ignore testing files
+test_snippets.py
+sandbox.py
+
+# Ignore any temporary files
+*.tmp
+*.log
+
+# Ignore sample data
+sample.csv
+
+# venv
+/.venv

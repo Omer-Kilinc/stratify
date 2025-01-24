@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 class BacktestingEngine():
     def __init__(self, strategy, market_data, start_date, end_date, timeframe, initial_capital, slippage, commission, asset, leverage):
@@ -13,7 +14,8 @@ class BacktestingEngine():
         self.asset = asset
         self.leverage = leverage
 
-class MarketData:
+
+class MarketData():
     def __init__(self, data_source, file_path=None, api_url=None, api_key=None):
         data = {
             "timestamp":[],
@@ -36,17 +38,20 @@ class MarketData:
             raise ValueError("File does not exist")
         else:
             data = pd.read_csv(file_path)
-            if set(data.columns) != set(self.dataFrame.keys()):
-                raise ValueError("CSV file must contain the following columns: timestamp, open, high, low, close, volume")
-            self.dataFrame = pd.DataFrame(data, columns=self.data.keys())
+            if not set(self.dataFrame.columns).issubset(set(data.columns)):
+                raise ValueError(f"CSV file must contain the following columns: {', '.join(self.dataFrame.columns)}")
+            self.dataFrame = data[self.dataFrame.columns]
 
+    # TODO Add loading from API
     def load_from_api(self):
         raise NotImplementedError
 
 
-class strategy():
-    def __init__:
+class Strategy():
+    def __init__(self):
+        pass
 
 if __name__ == "__main__":
-    print("Hello, World!")
+    print("Execute")
+
 
